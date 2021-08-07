@@ -1,0 +1,21 @@
+{
+  "name": "obs-overlay",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "snowpack dev",
+    "build": "snowpack build"
+  },
+  "author": "William Hilton <wmhilton@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "easy-twitch-bot": "^4.6.5",
+    "fireworks-canvas": "^2.6.2",
+    "ws": "^8.0.0"
+  },
+  "devDependencies": {
+    "snowpack": "^3.8.3"
+  }
+}
