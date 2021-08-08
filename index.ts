@@ -1,4 +1,4 @@
-import { fireworks } from './fireworks.js';
+import { fireworks } from './fireworks';
 import { ReliableWebSocket } from './websocket';
 
 

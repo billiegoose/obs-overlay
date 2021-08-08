@@ -1,10 +1,10 @@
 require('dotenv').config();
-const { ChatClient } = require('twitch-chat-client');
-const ws = require('ws');
+import { ChatClient } from 'twitch-chat-client';
+import * as ws from 'ws';
 
 const wss = new ws.Server({ port: 3030 });
 
-const broadcast = (cmd, payload) => {
+const broadcast = (cmd: string, payload?: string) => {
     wss.clients.forEach(client => {
         if (client.readyState === ws.OPEN) {
             client.send(payload ? cmd + '\n' + payload : cmd);
