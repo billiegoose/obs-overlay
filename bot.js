@@ -4,12 +4,20 @@ const ws = require('ws');
 
 const wss = new ws.Server({ port: 3030 });
 
+const broadcast = (cmd, payload) => {
+    wss.clients.forEach(client => {
+        if (client.readyState === ws.OPEN) {
+            client.send(payload ? cmd + '\n' + payload : cmd);
+        }
+    });
+}
+
 wss.on('connection', conn => {
     conn.on('message', message => {
         console.log('received: %s', message);
     });
 
-    conn.send('fireworks');
+    broadcast('fireworks');
 });
 
 const chatClient = ChatClient.anonymous({ channels: ['wmhilton'] });
@@ -19,11 +27,7 @@ chatClient.connect().then(() => {
     chatClient.onMessage(async (channel, user, message, msg) => {
         console.log(channel, user, message, msg);
         if (message === '!fireworks') {
-            wss.clients.forEach(client => {
-                if (client.readyState === WebSocket.OPEN) {
-                    client.send('fireworks');
-                }
-            });
+            broadcast('fireworks')
         }
     });
 })
